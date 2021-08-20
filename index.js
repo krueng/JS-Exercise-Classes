@@ -148,6 +148,10 @@ class Instructor extends Lambdasian {
   grade(student, subject) {
     return `${student.name} receives a perfect score on ${subject}`
   }
+  giveGradeTo(student) { //STRETCH PROBLEM
+    student.grade = Math.floor(Math.random() * 100);
+    return `${student.grade} given to student ${student.name} by Instructor ${this.name}`;
+  }
 }
 /*
   TASK 5
@@ -170,6 +174,7 @@ class Student extends Lambdasian {
     this.previousBackground = atrs.previousBackground;
     this.className = atrs.className;
     this.favSubjects = atrs.favSubjects;
+    this.grade = Math.floor(Math.random() * 100)//STRETCH PROBLEM
   }
   listSubjects() {
     return `Loving ${this.favSubjects}!`;
@@ -180,6 +185,13 @@ class Student extends Lambdasian {
   }
   sprintChallenge(subject) {
     return `${this.name} has begun sprint challenge on ${subject}`;
+  }
+  graduate(student){
+    if(student.grade > 70){
+return `${student.name}'s grade is ${student.grade}%, and is ready to graduate`;
+    }else{
+      return `Student ${student.name} is not ready to graduate. Grade: ${student.grade}%`;
+    }
   }
 }
 
@@ -218,6 +230,37 @@ class ProjectManager extends Instructor {
       + This method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
       + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
 */
+
+const studentWho = new Student({
+  name: "Who",
+  age: 53,
+  location: 'Moon',
+  previousBackground: 'Cooks',
+  className: 'WEB47',
+  favSubjects: 'Sports'
+})
+
+const instructorBean = new Instructor({
+  name: "Bean",
+  age: 49,
+  location: 'Mars',
+  specialty: 'Web',
+  favLanguage: 'PHP',
+  catchPhrase: "Kwel"
+})
+
+const pmMoon = new ProjectManager({
+  name: "Moon",
+  age: 59,
+  location: 'Venus',
+  gradClassName: 'Web',
+  favInstructor: 'Brit'
+})
+
+// console.log(pmMoon.giveGradeTo(studentWho));
+console.log(instructorBean.giveGradeTo(studentWho));
+console.log(studentWho.graduate(studentWho));
+
 
 
 //End of Challenge
